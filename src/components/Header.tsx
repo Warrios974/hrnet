@@ -26,7 +26,6 @@ export default function Header() {
       <>
         {generateLink('/', 'Dashboard', currentPage === '/')}
         {generateLink('/registration', 'Registration', currentPage === '/registration')}
-        {generateLink('/employees', 'All employees', currentPage === '/employees')}
       </>
     )
   }
