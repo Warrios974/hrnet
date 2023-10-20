@@ -2,6 +2,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import './globals.css'
 import type { Metadata } from 'next'
+import Head from 'next/head'
 
 
 export const metadata: Metadata = {
@@ -16,6 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className='h-full bg-gray-100'>
+    <Head>
+      <title>My page title</title>
+    </Head>
       <body className="h-full">
         <div className='min-h-full'>
           <Header />
