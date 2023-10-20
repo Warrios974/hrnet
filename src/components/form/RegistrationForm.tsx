@@ -1,11 +1,14 @@
 'use client'
 
 import { User, useEmployeeStore } from '@/store/UsersStore';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import SubmitFormModal from './SubmitFormModal';
 
 export default function RegistrationForm() {
 
   const {users, addUser} = useEmployeeStore()
+  
+  const [displayModal, setDisplayModal] = useState(false)
 
   const [formData, setFormData] = useState<User>({
     firstName: 'John',
@@ -42,6 +45,8 @@ export default function RegistrationForm() {
       zipCodeAddress: '',
       departement: '',
     });
+
+    setDisplayModal(true)
   };
 
   console.log('====');
@@ -231,6 +236,7 @@ export default function RegistrationForm() {
           Save
         </button>
       </form>
+      {displayModal && <SubmitFormModal />}
     </div>
   )
 }
