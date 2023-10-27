@@ -3,17 +3,20 @@
 import { User, useEmployeeStore } from '@/store/UsersStore';
 import { ChangeEvent, useEffect, useState } from 'react';
 import SubmitFormModal from './SubmitFormModal';
+import DatePickerForm from './DatePickerForm';
 
 export default function RegistrationForm() {
+  
 
   const {users, addUser} = useEmployeeStore()
   
   const [displayModal, setDisplayModal] = useState(false)
+  const [setUp, setSetUp] = useState(false)
 
   const [formData, setFormData] = useState<User>({
     firstName: 'John',
     lastName: 'Doe',
-    dateOfBirth: '2000-01-01',
+    dateOfBirth: '2023-01-01',
     startDate: '2023-01-01',
     streetAddress: '123 Main St',
     cityAddress: 'Anytown',
@@ -22,8 +25,11 @@ export default function RegistrationForm() {
     departement: 'Alabama',
   });
 
-  const handleInputChange = (e : ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  useEffect(() => {
+    setSetUp(true)
+  }, [])
+
+  const handleInputChange = (name: string, value: string) => {
     setFormData({ ...formData, [name]: value });
   }
 
@@ -49,11 +55,7 @@ export default function RegistrationForm() {
     setDisplayModal(true)
   };
 
-  console.log('====');
-  console.log('users',users);
-  console.log('====');
-
-  return (
+  if(setUp) return (
     <div className="p-8 flex flex-col justify-center items-center">
       <form className="w-96 bg-white shadow-md rounded px-8 py-6" onSubmit={handleSubmit}>
         <h2 className="text-3xl text-center font-bold mt-4 mb-8">Create Employee</h2>
@@ -73,7 +75,7 @@ export default function RegistrationForm() {
             pattern="^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$"
             title="Seuls les lettres et espaces sont autorisés, y compris les caractères accentués"
             value={formData.firstName}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -92,7 +94,7 @@ export default function RegistrationForm() {
             pattern="^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$"
             title="Seuls les lettres et espaces sont autorisés, y compris les caractères accentués"
             value={formData.lastName}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -102,15 +104,7 @@ export default function RegistrationForm() {
           >
             Date of Birth <span className="text-red-500 px-1">*</span>
           </label>
-          <input
-            type="date"
-            id="dateOfBirth"
-            name="dateOfBirth"
-            className="w-full px-3 py-2 rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-500"
-            required
-            value={formData.dateOfBirth}
-            onChange={handleInputChange}
-          />
+          <DatePickerForm id='dateOfBirth' handleInputChange={handleInputChange} valueProps={formData.dateOfBirth}/>
         </div>
         <div className="mb-4">
           <label
@@ -119,15 +113,7 @@ export default function RegistrationForm() {
           >
             Start Date <span className="text-red-500 px-1">*</span>
           </label>
-          <input
-            type="date"
-            id="startDate"
-            name="startDate"
-            className="w-full px-3 py-2 rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-500"
-            required
-            value={formData.startDate}
-            onChange={handleInputChange}
-          />
+          <DatePickerForm id='startDate' handleInputChange={handleInputChange} valueProps={formData.startDate}/>
         </div>
         <fieldset className="border border-gray-300 p-4 rounded mt-4 mb-4">
           <legend className="text-lg text-gray-500 font-bold px-2"> Address </legend>
@@ -147,7 +133,7 @@ export default function RegistrationForm() {
               pattern="^[a-zA-Z0-9\s]+$"
               title="Only letters, numbers, and spaces are allowed"
               value={formData.streetAddress}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChange(e.target.name, e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -166,7 +152,7 @@ export default function RegistrationForm() {
               pattern="^[a-zA-Z\s]+$"
               title="Only letters and spaces are allowed"
               value={formData.cityAddress}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChange(e.target.name, e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -182,7 +168,7 @@ export default function RegistrationForm() {
               className="w-full px-3 py-2 rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-500"
               required
               value={formData.stateAddress}
-              onChange={() => handleInputChange}
+              onChange={(e) => handleInputChange(e.target.name, e.target.value)}
             >
               <option value="Alabama">Alabama</option>
               <option value="Alaska">Alaska</option>
@@ -205,7 +191,7 @@ export default function RegistrationForm() {
               pattern="^[0-9]{5}(?:-[0-9]{4})?$"
               title="Enter a valid ZIP code"
               value={formData.zipCodeAddress}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChange(e.target.name, e.target.value)}
             />
           </div>
         </fieldset>
@@ -222,7 +208,7 @@ export default function RegistrationForm() {
             className="w-full px-3 py-2 rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-500"
             required
             value={formData.departement}
-            onChange={() => handleInputChange}
+            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
           >
             <option value="Alabama">Alabama</option>
             <option value="Alaska">Alaska</option>
