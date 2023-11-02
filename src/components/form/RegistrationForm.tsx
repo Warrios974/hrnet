@@ -1,14 +1,16 @@
 'use client'
 
 import { User, useEmployeeStore } from '@/store/UsersStore';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SubmitFormModal from './SubmitFormModal';
 import DatePickerForm from './DatePickerForm';
+import statesData from '@/data/states.json';
+import Select from 'react-select'
 
 export default function RegistrationForm() {
   
-
-  const {users, addUser} = useEmployeeStore()
+  const states = statesData.states ;
+  const {addUser} = useEmployeeStore()
   
   const [displayModal, setDisplayModal] = useState(false)
   const [setUp, setSetUp] = useState(false)
@@ -22,8 +24,16 @@ export default function RegistrationForm() {
     cityAddress: 'Anytown',
     stateAddress: 'Alabama',
     zipCodeAddress: '12345',
-    departement: 'Alabama',
+    departement: 'Sales',
   });
+
+  const optionsDepartement = [
+    { value: 'Sales', label: 'Sales' },
+    { value: 'Marketing', label: 'Marketing' },
+    { value: 'Engineering', label: 'Engineering' },
+    { value: 'Humain Resources', label: 'Humain Resources' },
+    { value: 'Legal', label: 'Legal' }
+  ]
 
   useEffect(() => {
     setSetUp(true)
@@ -162,18 +172,15 @@ export default function RegistrationForm() {
             >
               State <span className="text-red-500 px-1">*</span>
             </label>
-            <select
-              id="state"
-              name="stateAddress"
-              className="w-full px-3 py-2 rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-500"
-              required
-              value={formData.stateAddress}
-              onChange={(e) => handleInputChange(e.target.name, e.target.value)}
-            >
-              <option value="Alabama">Alabama</option>
-              <option value="Alaska">Alaska</option>
-              {/* Ajoutez plus d'options d'États au besoin */}
-            </select>
+            <Select 
+              options={states.map((state) => 
+                ({ value: state, label: state })
+              )} 
+              onChange={(data) => {
+                if(data) handleInputChange(data.label, data.value)}
+              }
+              value={{ value: formData.stateAddress, label: formData.stateAddress }}
+              />
           </div>
           <div className="mb-4">
             <label
@@ -202,18 +209,14 @@ export default function RegistrationForm() {
           >
             State <span className="text-red-500 px-1">*</span>
           </label>
-          <select
-            id="departement"
-            name="departement"
-            className="w-full px-3 py-2 rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-500"
-            required
-            value={formData.departement}
-            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
-          >
-            <option value="Alabama">Alabama</option>
-            <option value="Alaska">Alaska</option>
-            {/* Ajoutez plus d'options d'États au besoin */}
-          </select>
+          <Select 
+            id='departement'
+            options={optionsDepartement} 
+            onChange={(data) => {
+              if(data) handleInputChange(data.label, data.value)}
+            }
+            value={{ value: formData.departement, label: formData.departement }}
+            />
         </div>
         <button
           type="submit"
@@ -222,7 +225,10 @@ export default function RegistrationForm() {
           Save
         </button>
       </form>
-      {displayModal && <SubmitFormModal />}
+      <SubmitFormModal
+        isOpen={displayModal}
+        setIsOpen={setDisplayModal}
+      />
     </div>
   )
 }
