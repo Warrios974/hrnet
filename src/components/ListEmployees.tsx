@@ -22,7 +22,7 @@ export default function ListEmployees() {
                     </div>
                     <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
                         <p className="text-sm leading-6 text-gray-900">{user.departement}</p>
-                        <p className="mt-1 text-xs leading-5 text-gray-500">Start day :  {user.startDate}</p>
+                        <p className="mt-1 text-xs leading-5 text-gray-500">{user.departement}</p>
                     </div>
                 </li>
             ))}

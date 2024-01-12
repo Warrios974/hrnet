@@ -6,6 +6,8 @@ type SubmitFormModalType = {
     setIsOpen: (element: boolean) => void
 }
 
+ReactModal.setAppElement('#root');
+
 export default function SubmitFormModal({ isOpen, setIsOpen } : SubmitFormModalType) {
 
     const message = 'Employee Created !'

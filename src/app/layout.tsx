@@ -19,7 +19,7 @@ export default function RootLayout({
         <Head>
           <title>My page title</title>
         </Head>
-          <body className="h-full">
+          <body id='root' className="h-full">
             <div className='min-h-full'>
               <Header />
               {children}

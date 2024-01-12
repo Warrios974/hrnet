@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import SubmitFormModal from './SubmitFormModal';
 import DatePickerForm from './DatePickerForm';
 import statesData from '@/data/states.json';
-import Select from 'react-select'
+import Select, { StylesConfig, OptionTypeBase  } from 'react-select'
 
 export default function RegistrationForm() {
   
@@ -27,6 +27,9 @@ export default function RegistrationForm() {
     departement: 'Sales',
   });
 
+  // Options du Select
+  const optionsState = states.map((state) => ({ value: state, label: state }));
+
   const optionsDepartement = [
     { value: 'Sales', label: 'Sales' },
     { value: 'Marketing', label: 'Marketing' },
@@ -34,6 +37,20 @@ export default function RegistrationForm() {
     { value: 'Humain Resources', label: 'Humain Resources' },
     { value: 'Legal', label: 'Legal' }
   ]
+
+  const styleSelect: StylesConfig<OptionTypeBase> = {
+    control: (baseStyles, state) => ({
+      ...baseStyles,
+      borderColor: state.isFocused ? 'rgb(132 204 22)' : 'grey',
+    }),
+    option: (baseStyles, state) => {
+      return {
+          ...baseStyles, 
+          backgroundColor: state.isFocused ? "rgb(217 249 157)" : state.isSelected ? "rgb(132 204 22)" : '#fff',
+          color: '#000',
+      }
+    }, 
+  }
 
   useEffect(() => {
     setSetUp(true)
@@ -173,13 +190,13 @@ export default function RegistrationForm() {
               State <span className="text-red-500 px-1">*</span>
             </label>
             <Select 
-              options={states.map((state) => 
-                ({ value: state, label: state })
-              )} 
+              id='state'
+              options={optionsState} 
               onChange={(data) => {
-                if(data) handleInputChange(data.label, data.value)}
+                if(data) handleInputChange('stateAddress', data.value)}
               }
-              value={{ value: formData.stateAddress, label: formData.stateAddress }}
+              value={formData.stateAddress ? { value: formData.stateAddress, label: formData.stateAddress } : null}
+              styles={styleSelect}
               />
           </div>
           <div className="mb-4">
@@ -207,15 +224,16 @@ export default function RegistrationForm() {
             htmlFor="departement"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
-            State <span className="text-red-500 px-1">*</span>
+            Departement <span className="text-red-500 px-1">*</span>
           </label>
           <Select 
             id='departement'
             options={optionsDepartement} 
             onChange={(data) => {
-              if(data) handleInputChange(data.label, data.value)}
+              if(data) handleInputChange('departement', data.value)}
             }
             value={{ value: formData.departement, label: formData.departement }}
+            styles={styleSelect}
             />
         </div>
         <button
