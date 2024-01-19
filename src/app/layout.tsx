@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
       <html lang="en" className='h-full bg-gray-100'>
         <Head>
-          <title>My page title</title>
+          <title>HRNET</title>
         </Head>
           <body id='root' className="h-full">
             <div className='min-h-full'>

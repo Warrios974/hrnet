@@ -8,12 +8,12 @@ export default function Page() {
     const users = useEmployeeStore((state) => state.users)
     const columns: TableColumn[] = [
         {
-            name: 'First Name',
+            name: 'First name',
             key: 'firstName',
             selector: row => row.firstName,
         },
         {
-            name: 'Last Name',
+            name: 'Last name',
             key: 'lastName',
             selector: row => row.lastName,
         },
@@ -55,13 +55,18 @@ export default function Page() {
     ]
     console.log(users)
     return (
-        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl py-6 px-6 lg:px-8 bg-white rounded-md">
             <Table 
                 displaySearchBar={true}
                 diplayEntries={true}
-                displayInfoEntries={true}
+                displayInfoEntries={false}
                 diplayFooterRow={false}
                 listOfNumbersOfEntries={[2, 10, 25, 50]}
+                classNameBtnNextAndPrevious='btn btn-primary mx-1'
+                classNameBtnNumber='btn btn-secondary mx-1'
+                classNameInput='input'
+                classNamethHeader='border-b border-gray-400 font-semibold'
+                classNametd='border-b border-gray-300 text-center py-2'
                 columns={columns}
                 data={users}
             />

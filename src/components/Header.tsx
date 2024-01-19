@@ -3,55 +3,67 @@
 import Image from "next/image"
 import Link from "next/link";
 import logo from '@/assets/logo-transparent.png'
+import menuIcon from '@/assets/menu.svg'
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+
+type HeaderLinkProps = {
+  path: string;
+  text: string;
+  isActive: boolean;
+}
 
 export default function Header() {
-
   const currentPage = usePathname()
-
-  function generateLink(path: string, text : string, isActive: boolean) {
-    const className = isActive ? 'active-btn-main-menu' : 'inactive-btn-main-menu';
-    const ariaCurrent = isActive ? 'page' : '' as "page";
-  
-    return (
-      <Link href={path} className={className} aria-current={ariaCurrent}>
-        {text}
-      </Link>
-    );
-  }
-
-  const NavMenu = () => {
-
-    return (
-      <>
-        {generateLink('/', 'Dashboard', currentPage === '/')}
-        {generateLink('/registration', 'Registration', currentPage === '/registration')}
-      </>
-    )
-  }
   
   return (
     <nav className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center">
-            <div className="flex-shrink-0">
+        <div className="flex justify-between items-center flex-wrap py-3">
+          <div className="flex-shrink-0">
+            <Link href={'/'} className="text-white" aria-current="page">
               <Image className="h-8 w-8" src={logo} alt="" />
-            </div>
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                <NavMenu />
-              </div>
+            </Link>
+          </div>
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              <HeaderLink path={'/'} text={'Dashboard'} isActive={currentPage === '/'} />
+              <HeaderLink path={'/registration'} text={'Registration'} isActive={currentPage === '/registration'} />
             </div>
           </div>
-        </div>
-      </div>
-      <div className="md:hidden" id="mobile-menu">
-        <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-          <Link href={'/'} className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</Link>
-          <Link href={'/'} className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Registration</Link>
+          <MobileMenu />
         </div>
       </div>
     </nav>
   )
+}
+
+const HeaderLink = ({path, text , isActive}: HeaderLinkProps) => {
+
+  const className = isActive ? 'active-btn-main-menu' : 'inactive-btn-main-menu';
+  const ariaCurrent = isActive ? 'page' : '' as "page";
+
+  return (
+    <Link href={path} className={className} aria-current={ariaCurrent}>
+      {text}
+    </Link>
+  )
+}
+
+const MobileMenu = () => {
+
+  const currentPage = usePathname()
+  const [isOpen, setIsOpen] = useState(false)
+  
+    return (
+      <>
+        <Image onClick={() => setIsOpen(!isOpen)} className="sm:hidden cursor-pointer" src={menuIcon} alt="" />
+        <div className={`${isOpen ? '' : 'hidden'} md:hidden w-full`} id="mobile-menu">
+          <div className="flex flex-col space-y-1 px-2 pb-3 pt-2 sm:px-3">
+              <HeaderLink path={'/'} text={'Dashboard'} isActive={currentPage === '/'} />
+              <HeaderLink path={'/registration'} text={'Registration'} isActive={currentPage === '/registration'} />
+          </div>
+        </div>
+      </>
+    )
 }
