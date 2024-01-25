@@ -24,8 +24,8 @@ export default function Page() {
     },
     {
       name: "Department",
-      key: "departement",
-      selector: (row) => row.departement,
+      key: "department",
+      selector: (row) => row.department,
     },
     {
       name: "Date of birth",
@@ -58,15 +58,15 @@ export default function Page() {
     <div className="mx-auto max-w-7xl py-6 px-6 lg:px-8 bg-white rounded-md">
       <Table
         displaySearchBar={true}
-        diplayEntries={true}
+        displayEntries={true}
         displayInfoEntries={false}
-        diplayFooterRow={false}
+        displayFooterRow={false}
         listOfNumbersOfEntries={[2, 10, 25, 50]}
         classNameBtnNextAndPrevious="btn btn-primary mx-1"
         classNameBtnNumber="btn btn-secondary mx-1"
         classNameInput="input"
-        classNamethHeader="border-b border-gray-400 font-semibold"
-        classNametd="border-b border-gray-300 text-center py-2"
+        classNameThHeader="border-b border-gray-400 font-semibold"
+        classNameTd="border-b border-gray-300 text-center py-2"
         columns={columns}
         data={users}
       />

@@ -17,7 +17,7 @@ const INITIAL_FORM_DATA = {
   cityAddress: "",
   stateAddress: "",
   zipCodeAddress: "",
-  departement: "",
+  department: "",
 };
 
 export default function RegistrationForm() {
@@ -37,13 +37,13 @@ export default function RegistrationForm() {
     cityAddress: "Anytown",
     stateAddress: "Alabama",
     zipCodeAddress: "12345",
-    departement: "Sales",
+    department: "Sales",
   });
 
   // Options du Select
   const optionsState = states.map((state) => ({ value: state, label: state }));
 
-  const optionsDepartement = [
+  const optionsDepartment = [
     { value: "Sales", label: "Sales" },
     { value: "Marketing", label: "Marketing" },
     { value: "Engineering", label: "Engineering" },
@@ -249,7 +249,7 @@ export default function RegistrationForm() {
             <CustomSelect
               id="departement"
               name="departement"
-              options={optionsDepartement}
+              options={optionsDepartment}
               onChange={(data) => {
                 if (data)
                   handleInputChange(
@@ -258,8 +258,8 @@ export default function RegistrationForm() {
                   );
               }}
               value={{
-                value: formData.departement,
-                label: formData.departement,
+                value: formData.department,
+                label: formData.department,
               }}
             />
           </div>

@@ -10,7 +10,7 @@ export type User = {
   cityAddress: string;
   stateAddress: string;
   zipCodeAddress: string;
-  departement: string;
+  department: string;
 };
 
 type Store = {
