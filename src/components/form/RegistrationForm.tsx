@@ -5,7 +5,25 @@ import { useEffect, useState } from 'react';
 import SubmitFormModal from './SubmitFormModal';
 import DatePickerForm from './DatePickerForm';
 import statesData from '@/data/states.json';
-import Select, { StylesConfig, OptionTypeBase  } from 'react-select'
+import Select, { ActionMeta, GroupBase, StylesConfig } from 'react-select'
+import StateManagedSelect from 'react-select';
+import OptionTypeBase from "react-select"
+import CustomSelect, { SelectOptions } from './CustomSelect';
+
+const INITIAL_FORM_DATA = {
+  id: '',
+  firstName: '',
+  lastName: '',
+  dateOfBirth: '',
+  startDate: '',
+  streetAddress: '',
+  cityAddress: '',
+  stateAddress: '',
+  zipCodeAddress: '',
+  departement: '',
+}
+
+type OptionType = { [key: string]: any }
 
 export default function RegistrationForm() {
   
@@ -16,6 +34,7 @@ export default function RegistrationForm() {
   const [setUp, setSetUp] = useState(false)
 
   const [formData, setFormData] = useState<User>({
+    id: '0',
     firstName: 'John',
     lastName: 'Doe',
     dateOfBirth: '2023-01-01',
@@ -31,11 +50,11 @@ export default function RegistrationForm() {
   const optionsState = states.map((state) => ({ value: state, label: state }));
 
   const optionsDepartement = [
-    { value: 'Sales', label: 'Sales' },
-    { value: 'Marketing', label: 'Marketing' },
-    { value: 'Engineering', label: 'Engineering' },
-    { value: 'Humain Resources', label: 'Humain Resources' },
-    { value: 'Legal', label: 'Legal' }
+    { value: 'Sales', label: 'Sales'},
+    { value: 'Marketing', label: 'Marketing'},
+    { value: 'Engineering', label: 'Engineering'},
+    { value: 'Humain Resources', label: 'Humain Resources'},
+    { value: 'Legal', label: 'Legal'}
   ]
 
   const styleSelect: StylesConfig<OptionTypeBase> = {
@@ -63,21 +82,11 @@ export default function RegistrationForm() {
   const handleSubmit = (e : React.FormEvent) => {
     e.preventDefault();
 
-    // Utilisez la fonction addUser du store pour ajouter l'utilisateur
+    // La fonction addUser du store pour ajouter l'utilisateur
     addUser(formData);
 
     // Réinitialisez le formulaire
-    setFormData({
-      firstName: '',
-      lastName: '',
-      dateOfBirth: '',
-      startDate: '',
-      streetAddress: '',
-      cityAddress: '',
-      stateAddress: '',
-      zipCodeAddress: '',
-      departement: '',
-    });
+    setFormData(INITIAL_FORM_DATA);
 
     setDisplayModal(true)
   };
@@ -189,17 +198,14 @@ export default function RegistrationForm() {
             >
               State <span className="text-red-500 px-1">*</span>
             </label>
-            <Select 
+            <CustomSelect 
               id='state'
               options={optionsState} 
-              onChange={(data) => {
-                if(data) handleInputChange('stateAddress', data.value)}
-              }
-              value={formData.stateAddress ? { value: formData.stateAddress, label: formData.stateAddress } : null}
-              styles={styleSelect}
+              onChange={(data) => {if(data) handleInputChange('stateAddress', (data as SelectOptions).value)}}
+              value={formData.stateAddress ? { value: formData.stateAddress, label: formData.stateAddress } : undefined}
               />
           </div>
-          <div className="mb-4">
+          <div className="mb-4"> 
             <label
               htmlFor="zipcode"
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -226,14 +232,13 @@ export default function RegistrationForm() {
           >
             Departement <span className="text-red-500 px-1">*</span>
           </label>
-          <Select 
+          <CustomSelect 
             id='departement'
             options={optionsDepartement} 
             onChange={(data) => {
-              if(data) handleInputChange('departement', data.value)}
+              if (data) handleInputChange('departement', (data as SelectOptions).value)}
             }
             value={{ value: formData.departement, label: formData.departement }}
-            styles={styleSelect}
             />
         </div>
         <button
