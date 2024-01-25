@@ -21,7 +21,7 @@ export default function Header() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center flex-wrap py-3">
           <div className="flex-shrink-0">
-            <Link href={'/'} className="text-white" aria-current="page">
+            <Link href={'/'} className="text-white" aria-current="page" aria-label="Home">
               <Image className="h-8 w-8" src={logo} alt="" />
             </Link>
           </div>
