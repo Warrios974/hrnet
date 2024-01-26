@@ -241,19 +241,19 @@ export default function RegistrationForm() {
           </fieldset>
           <div className="mb-4">
             <label
-              htmlFor="departement"
+              htmlFor="department"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Departement <span className="text-red-500 px-1">*</span>
+              Department <span className="text-red-500 px-1">*</span>
             </label>
             <CustomSelect
-              id="departement"
-              name="departement"
+              id="department"
+              name="department"
               options={optionsDepartment}
               onChange={(data) => {
                 if (data)
                   handleInputChange(
-                    "departement",
+                    "department",
                     (data as SelectOptions).value
                   );
               }}
