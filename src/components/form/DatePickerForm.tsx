@@ -3,6 +3,13 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // Importez le fichier CSS de react-datepicker
 
+/**
+ * Props de DatePickerForm
+ * @param id - ID de l'input
+ * @param handleInputChange - Fonction pour gérer le changement de l'input
+ * @param valueProps - Valeur de l'input
+ * @returns
+ */
 type DatePickerFormProps = {
   id: string;
   handleInputChange: (name: string, value: string) => void;
@@ -31,6 +38,13 @@ export default function DatePickerForm({
     "December",
   ];
 
+  /**
+   * Range function to create an array of numbers
+   * @param start
+   * @param end
+   * @param step
+   * @returns
+   */
   function range(start: number, end: number, step: number): number[] {
     const array = [];
     for (let i = start; i < end; i += step) {
@@ -39,6 +53,11 @@ export default function DatePickerForm({
     return array;
   }
 
+  /**
+   * Format date to string
+   * @param date
+   * @returns
+   */
   function formatDateToString(date: Date): string {
     const year = date.getFullYear();
     const month = addZero(date.getMonth() + 1);
@@ -46,6 +65,11 @@ export default function DatePickerForm({
     return `${year}-${month}-${day}`;
   }
 
+  /**
+   * Add zero to date
+   * @param num
+   * @returns
+   */
   function addZero(num: number): string {
     return num < 10 ? `0${num}` : num.toString();
   }
