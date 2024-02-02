@@ -1,5 +1,5 @@
 import { getMonth, getYear } from "date-fns"; // Importez getYear et getMonth depuis date-fns
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // Importez le fichier CSS de react-datepicker
 
@@ -30,13 +30,6 @@ export default function DatePickerForm({
     "November",
     "December",
   ];
-
-  useEffect(() => {
-    const handleInputChangeUpdate = () => {
-      handleInputChange(id, formatDateToString(startDate));
-    };
-    handleInputChangeUpdate();
-  }, [startDate]);
 
   function range(start: number, end: number, step: number): number[] {
     const array = [];
@@ -101,7 +94,10 @@ export default function DatePickerForm({
           </div>
         )}
         selected={startDate}
-        onChange={(date: Date) => setStartDate(date)}
+        onChange={(date: Date) => {
+          setStartDate(date);
+          handleInputChange(id, formatDateToString(date));
+        }}
         className="w-full px-4 py-2 rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-500"
       />
     </div>
