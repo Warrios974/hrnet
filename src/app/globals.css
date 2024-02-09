@@ -26,6 +26,8 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+/* Custom styles */
+
 .active-btn-main-menu {
   @apply bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium;
 }

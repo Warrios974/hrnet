@@ -1,3 +1,8 @@
+/**
+ * Layout for the employees page
+ * @param {React.ReactNode} children - The children to display
+ * @returns {JSX.Element} The layout for the employees page
+ */
 import Link from "next/link";
 
 export default function EmployeesLayout({

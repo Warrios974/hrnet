@@ -9,6 +9,7 @@ import { useEmployeeStore } from "@/store/UsersStore";
 
 export default function ListEmployees() {
   const users = useEmployeeStore((state) => state.users);
+  console.log(users);
 
   return (
     <div className="bg-white p-5 mt-4 rounded-md lg:flex lg:items-center lg:justify-between">
@@ -21,11 +22,16 @@ export default function ListEmployees() {
             >
               <div className="min-w-0 flex-auto">
                 <p className="text-sm font-semibold leading-6 text-gray-900">
-                  {user.firstName} {user.lastName}
+                  {user.firstName + " " + user.lastName}
                 </p>
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                  {user.streetAddress}, {user.cityAddress},{" "}
-                  {user.zipCodeAddress} - {user.stateAddress}
+                  {user.streetAddress +
+                    ", " +
+                    user.cityAddress +
+                    ", " +
+                    user.zipCodeAddress +
+                    " - " +
+                    user.stateAddress}
                 </p>
               </div>
               <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
@@ -33,7 +39,7 @@ export default function ListEmployees() {
                   {user.department}
                 </p>
                 <p className="mt-1 text-xs leading-5 text-gray-500">
-                  {user.department}
+                  Birthday : {user.dateOfBirth}
                 </p>
               </div>
             </li>

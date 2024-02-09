@@ -1,3 +1,7 @@
+/**
+ * @file This file represents the registration page.
+ * @returns {JSX.Element} The registration page
+ */
 "use client";
 
 import RegistrationForm from "@/components/form/RegistrationForm";

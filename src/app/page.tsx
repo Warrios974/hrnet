@@ -1,3 +1,7 @@
+/**
+ * @file This is the main page of the application
+ * @returns {JSX.Element} The main page of the application
+ */
 import ListEmployees from "@/components/ListEmployees";
 import Link from "next/link";
 

@@ -1,3 +1,8 @@
+/**
+ * This file is the root layout for the application.
+ * @param {React.ReactNode} children - The children to display
+ * @returns {JSX.Element} The root layout for the application
+ */
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import type { Metadata } from "next";

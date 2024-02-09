@@ -1,3 +1,7 @@
+/**
+ * Page not found component
+ * @returns {JSX.Element} The page not found component
+ */
 import Link from "next/link";
 
 export default function NotFound() {

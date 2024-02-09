@@ -1,3 +1,7 @@
+/**
+ * @file This file is the page for the employees.
+ * @returns {Table} From custom-react-table
+ */
 "use client";
 
 import { useEmployeeStore } from "@/store/UsersStore";
@@ -53,7 +57,7 @@ export default function Page() {
       selector: (row) => row.zipCodeAddress,
     },
   ];
-  console.log(users);
+
   return (
     <div className="mx-auto max-w-7xl py-6 px-6 lg:px-8 bg-white rounded-md">
       <Table
@@ -62,6 +66,7 @@ export default function Page() {
         displayInfoEntries={false}
         displayFooterRow={false}
         listOfNumbersOfEntries={[2, 10, 25, 50]}
+        customMessageNoData="No employees"
         classNameBtnNextAndPrevious="btn btn-primary mx-1"
         classNameBtnNumber="btn btn-secondary mx-1"
         classNameInput="input"
