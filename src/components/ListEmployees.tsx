@@ -1,3 +1,8 @@
+/**
+ * List of employees
+ * @returns {JSX.Element} List of employees
+ */
+
 "use client";
 
 import { useEmployeeStore } from "@/store/UsersStore";

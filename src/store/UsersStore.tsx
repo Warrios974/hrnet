@@ -1,3 +1,10 @@
+/**
+ * This file contains the store for the users
+ * Users are stored in a zustand store
+ * @function useEmployeeStore
+ * @returns { users } - The list of users
+ * @returns { addUser } - The function to add a user to users
+ */
 import { create } from "zustand";
 
 export type User = {

@@ -1,3 +1,8 @@
+/**
+ * Formulaire d'inscription pour ajouter un nouvel employé
+ * @returns Composant RegistrationForm
+ */
+
 "use client";
 
 import statesData from "@/data/states.json";
@@ -21,6 +26,7 @@ const INITIAL_FORM_DATA = {
 };
 
 export default function RegistrationForm() {
+  // Récupérer les Etats depuis le fichier JSON
   const states = statesData.states;
   const { addUser } = useEmployeeStore();
 
@@ -55,6 +61,7 @@ export default function RegistrationForm() {
     setSetUp(true);
   }, []);
 
+  // Gérer le changement deq inputs
   const handleInputChange = (name: string, value: string) => {
     setFormData({ ...formData, [name]: value });
   };

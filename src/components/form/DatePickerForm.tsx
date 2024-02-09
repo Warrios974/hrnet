@@ -1,15 +1,16 @@
+/**
+ * Composant Date Picker
+ * @param id - ID de l'input
+ * @param handleInputChange - Fonction pour gérer le changement de l'input
+ * @param valueProps - Valeur de l'input
+ * @returns Composant Date Picker
+ */
+
 import { getMonth, getYear } from "date-fns"; // Importez getYear et getMonth depuis date-fns
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // Importez le fichier CSS de react-datepicker
 
-/**
- * Props de DatePickerForm
- * @param id - ID de l'input
- * @param handleInputChange - Fonction pour gérer le changement de l'input
- * @param valueProps - Valeur de l'input
- * @returns
- */
 type DatePickerFormProps = {
   id: string;
   handleInputChange: (name: string, value: string) => void;

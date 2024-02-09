@@ -1,3 +1,12 @@
+/**
+ * Custom select component
+ * @param id - id of the select
+ * @param options - options for the select
+ * @param onChange - function to handle the change of the select
+ * @param value - value of the select
+ * @param name - name of the select
+ * @returns Custom select component
+ */
 "use-client";
 
 import Select, {
@@ -31,6 +40,7 @@ export default function CustomSelect({
   value,
   name,
 }: CustomSelectProps) {
+  // Custom styles for the select
   const styleSelect: StylesConfig<
     SelectOptions,
     boolean,

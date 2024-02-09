@@ -1,3 +1,9 @@
+/**
+ * Modal component to show a message when a new employee is created
+ * @param isOpen - boolean to show or hide the modal
+ * @param setIsOpen - function to set the state of the modal
+ * @returns React Modal component
+ */
 import Link from "next/link";
 import ReactModal from "react-modal";
 
